@@ -20,17 +20,13 @@ func minimumLoss(price []int64) int32 {
 	// the length should be based on input's first line, but this function is
 	// prepared like that in the original issue, so just calculate it
 	pricesLen := len(price)
-	// also, the constaints say that 1 < price[i] < 10^16, so it's safe to convert it to int
-	intPrices := []int{}
-	for _, val := range price {
-		intPrices = append(intPrices, int(val))
-	}
 	// then just calculate stuff
-	minLoss := int(10e16)
+	minLoss := int64(10e16)
+	// startingPrice := 0
 	for i := 0; i < (pricesLen - 1); i++ {
+		currentPrice := price[i]
 		for j := 1; j < (pricesLen - i); j++ {
-			currentPrice := intPrices[i]
-			newPrice := intPrices[i+j]
+			newPrice := price[i+j]
 			if currentPrice < newPrice {
 				continue
 			}
